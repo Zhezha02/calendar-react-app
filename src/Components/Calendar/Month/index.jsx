@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getMonth, getYear } from 'date-fns';
-import {monthOfYear, dayOfWeek} from '../date';
+import {monthOfYear, dayOfWeek, getWeeksInMonth} from '../date';
 import Week from './Week';
 
 
@@ -13,6 +13,7 @@ class Month extends Component {
       }
       return head;
   }
+
   render() {
     const{date} = this.props;
     return <div>
@@ -20,6 +21,8 @@ class Month extends Component {
       <table>
         <thead>
           <tr>{this.renderTableHead()}</tr>
+          {}
+          <Week startDay, startDayOfWeek, endDay, endDayOfWeek/>
         </thead>
       </table>
     </div>;
