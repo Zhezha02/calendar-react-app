@@ -2,12 +2,26 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   padding: 10px;
-
   background-color: var(--main-color);
+  width: $calendar-length;
+  height: $calendar-length * 2;
+  font-family: 'RobotoCondensed', sans-serif;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    width: $calendar-length * 2;
+    height: $calendar-length;
+    // width: 2* $calendar-length;
+  }
 }
 
 .containerPart {
-  width: 50%;
+  flex-basis: 50%;
+  max-height: 50%;
+  @media screen and (min-width: 768px) {
+    max-width: 50%;
+    max-height: 100%;
+  }
 }
-

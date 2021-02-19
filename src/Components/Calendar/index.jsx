@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CurrentDay from './CurrentDay';
 import Month from './Month';
 import styles from './Calendar.module.scss';
+import '../styles/fonts.scss';
 
 class Calendar extends Component {
   constructor(props) {
