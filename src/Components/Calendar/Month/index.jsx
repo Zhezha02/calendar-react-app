@@ -1,32 +1,59 @@
-import React, { Component } from 'react';
-import { getMonth, getYear } from 'date-fns';
-import {monthOfYear, dayOfWeek, getWeeksInMonth} from '../date';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { format, startOfMonth, startOfWeek, add } from 'date-fns';
 import Week from './Week';
 
 
+const DaysOfWeek = () => {
+  return (
+    <tr>
+      <td>S</td>
+      <td>M</td>
+      <td>T</td>
+      <td>W</td>
+      <td>T</td>
+      <td>F</td>
+      <td>S</td>
+    </tr>
+  );
+};
 
-class Month extends Component {
-  renderTableHead=()=> {
-      const head = [];
-      for(let i = 0; i < 7; i++) {
-        head.push(<td>{dayOfWeek.get(i)[0]}</td>);
-      }
-      return head;
-  }
-
-  render() {
-    const{date} = this.props;
-    return <div>
-      <p>{monthOfYear.get(getMonth(date))} {getYear(date)}</p>
+const Month = (props) => {
+  const { date } = props;
+  const weeksOfMonth = () => {
+    const weeksArray = [];
+    const startOfFirstWeek = startOfWeek(startOfMonth(date));
+    for (let i = 0; i < 6; i++) {
+      const firstDayOfWeek = add(startOfFirstWeek, { weeks: i });
+      const currentWeek = format(startOfMonth(date), 'w') + i;
+      const currentYear = format(date, 'R');
+      weeksArray.push(
+        <Week
+          key={`${currentYear}_${currentWeek}`}
+          firstDayOfWeek={firstDayOfWeek}
+          currentDay={date}
+        />
+      );
+    }
+    return weeksArray;
+  };
+  return (
+    <div>
+      <h1>
+        {format(date, 'LLLL')} {format(date, 'R')}
+      </h1>
       <table>
         <thead>
-          <tr>{this.renderTableHead()}</tr>
-          {}
-          <Week startDay, startDayOfWeek, endDay, endDayOfWeek/>
+          <DaysOfWeek />
         </thead>
+        <tbody>{weeksOfMonth()}</tbody>
       </table>
-    </div>;
-  }
-}
+    </div>
+  );
+};
+
+Month.protoTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+};
 
 export default Month;

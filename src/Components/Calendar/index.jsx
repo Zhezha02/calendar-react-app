@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import CheckedDay from './CheckedDay';
+
+import CurrentDay from './CurrentDay';
 import Month from './Month';
 
 class Calendar extends Component {
@@ -12,7 +13,7 @@ class Calendar extends Component {
     const { date } = this.state;
     return (
       <div>
-        <CheckedDay date={date} />
+        <CurrentDay date={date} />
         <Month date={date} />
       </div>
     );
