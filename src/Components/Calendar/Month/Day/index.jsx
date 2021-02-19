@@ -1,15 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { format } from 'date-fns';
-
+import classNames from 'classnames/bind';
+import { format, isWithinInterval, startOfMonth, endOfMonth } from 'date-fns';
+import styles from './Day.module.scss';
 
 const Day = (props) => {
   const { day, currentDay } = props;
-  return <td>
-{format(day, 'd')}
-  </td>;
+  const isCurrentMonth = isWithinInterval(day, {
+    start: startOfMonth(currentDay),
+    end: endOfMonth(currentDay),
+  });
+  return (
+    <td
+      className={classNames({
+        [styles.renderDay]: isCurrentMonth,
+        [styles.invisible]: !isCurrentMonth,
+      })}
+    >
+      {format(day, 'd')}
+    </td>
+  );
 };
-Week.propTypes = {
+Day.propTypes = {
   key: PropTypes.string,
   day: PropTypes.instanceOf(Date).isRequired,
   currentDay: PropTypes.instanceOf(Date),

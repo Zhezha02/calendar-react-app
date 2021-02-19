@@ -1,0 +1,10 @@
+@import '../../../styles/variables';
+
+.renderDay{
+  color: var(--light-text-color);
+  font-weight: bold;
+}
+
+.invisible{
+  visibility: hidden;
+}
