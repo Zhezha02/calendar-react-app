@@ -1,0 +1,31 @@
+@import '../../styles/variables';
+@import '../../styles/templates';
+.container {
+  @extend %block;
+  background-color: var(--light-bd-color);
+}
+
+.header {
+  @extend %header;
+  color: var(--main-color);
+  font-weight: 700;
+}
+
+.table {
+  margin-top: 10px;
+
+  td {
+    
+    $td-length: (($calendar-length - $calendar-padding * 2)/7)*0.9;
+    height: $td-length;
+    width: $td-length;
+    text-align: center;
+    line-height: $td-length;
+    
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+}
+.tableHead {
+  color: var(--accent-color);
+}

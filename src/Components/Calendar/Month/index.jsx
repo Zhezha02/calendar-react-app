@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 import { format, startOfMonth, startOfWeek, add } from 'date-fns';
 import Week from './Week';
-
+import styles from './Month.module.scss';
 
 const DaysOfWeek = () => {
   return (
@@ -26,11 +27,9 @@ const Month = (props) => {
     const startOfFirstWeek = startOfWeek(startOfMonth(date));
     for (let i = 0; i < 6; i++) {
       const firstDayOfWeek = add(startOfFirstWeek, { weeks: i });
-      const currentWeek = format(startOfMonth(date), 'w') + i;
-      const currentYear = format(date, 'R');
       weeksArray.push(
         <Week
-          key={`${currentYear}_${currentWeek}`}
+          key={`${format(startOfMonth(date), 'w') + i}_${format(date, 'R')}`}
           firstDayOfWeek={firstDayOfWeek}
           currentDay={date}
         />
@@ -39,12 +38,12 @@ const Month = (props) => {
     return weeksArray;
   };
   return (
-    <div className= {className}>
-      <h1>
+    <div className={classNames(className, [styles.container])}>
+      <h1 className={styles.header}>
         {format(date, 'LLLL')} {format(date, 'R')}
       </h1>
-      <table>
-        <thead>
+      <table className={styles.table}>
+        <thead className={styles.tableHead}>
           <DaysOfWeek />
         </thead>
         <tbody>{weeksOfMonth()}</tbody>
