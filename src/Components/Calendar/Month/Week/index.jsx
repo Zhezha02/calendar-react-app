@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { add } from 'date-fns';
+import { add, format } from 'date-fns';
 import Day from '../Day';
 
 const Week = (props) => {
-  const { firstDayOfWeek, currentDay, key } = props;
+  const { firstDayOfWeek, currentDay } = props;
   const daysOfWeek = () => {
     const daysArray = [];
 
     for (let i = 0; i < 7; i++) {
+      const renderDay = add(firstDayOfWeek, { days: i });
       daysArray.push(
-        <Day key={`${key}_${i}`} day={add(firstDayOfWeek, { days: i })} currentDay={currentDay} />
+        <Day key={format(renderDay, 'iii')} day={renderDay} currentDay={currentDay} />
       );
     }
     return daysArray;
@@ -19,7 +20,6 @@ const Week = (props) => {
 };
 
 Week.propTypes = {
-  key: PropTypes.string,
   firstDayOfWeek: PropTypes.instanceOf(Date).isRequired,
   currentDay: PropTypes.instanceOf(Date),
 };
