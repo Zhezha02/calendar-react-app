@@ -19,7 +19,8 @@ const DaysOfWeek = () => {
 };
 
 const Month = (props) => {
-  const { date } = props;
+  const { date, className } = props;
+
   const weeksOfMonth = () => {
     const weeksArray = [];
     const startOfFirstWeek = startOfWeek(startOfMonth(date));
@@ -38,7 +39,7 @@ const Month = (props) => {
     return weeksArray;
   };
   return (
-    <div>
+    <div className= {className}>
       <h1>
         {format(date, 'LLLL')} {format(date, 'R')}
       </h1>
@@ -54,6 +55,7 @@ const Month = (props) => {
 
 Month.protoTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
+  className: PropTypes.string,
 };
 
 export default Month;

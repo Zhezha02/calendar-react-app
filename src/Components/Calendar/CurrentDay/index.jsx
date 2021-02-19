@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 
 const CurrentDay = (prors) => {
-  const { date } = prors;
+  const { date, className } = prors;
 
   return (
-    <div>
+    <div className={className}>
       <p>{format(date, 'eeee')}</p>
       <p>{format(date, 'd')}</p>
     </div>
@@ -15,5 +15,6 @@ const CurrentDay = (prors) => {
 
 CurrentDay.protoTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
+  className: PropTypes.string,
 };
 export default CurrentDay;

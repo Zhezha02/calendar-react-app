@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import CurrentDay from './CurrentDay';
 import Month from './Month';
+import styles from './Calendar.module.scss';
 
 class Calendar extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class Calendar extends Component {
   render() {
     const { date } = this.state;
     return (
-      <div>
-        <CurrentDay date={date} />
-        <Month date={date} />
+      <div className={styles.container}>
+        <CurrentDay className={styles.containerPart} date={date} />
+        <Month className={styles.containerPart} date={date} />
       </div>
     );
   }
