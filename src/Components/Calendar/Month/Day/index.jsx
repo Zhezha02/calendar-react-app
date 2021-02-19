@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { format, isWithinInterval, startOfMonth, endOfMonth } from 'date-fns';
+import {
+  format,
+  isWithinInterval,
+  startOfMonth,
+  endOfMonth,
+  isSameDay,
+} from 'date-fns';
 import styles from './Day.module.scss';
 
 const Day = (props) => {
@@ -15,6 +21,7 @@ const Day = (props) => {
       className={classNames({
         [styles.renderDay]: isCurrentMonth,
         [styles.invisible]: !isCurrentMonth,
+        [styles.checkedDay]: isSameDay(day, currentDay),
       })}
     >
       {format(day, 'd')}
@@ -22,7 +29,6 @@ const Day = (props) => {
   );
 };
 Day.propTypes = {
-  key: PropTypes.string,
   day: PropTypes.instanceOf(Date).isRequired,
   currentDay: PropTypes.instanceOf(Date),
 };

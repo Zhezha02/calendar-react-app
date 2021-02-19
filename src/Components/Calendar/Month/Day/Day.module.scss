@@ -1,10 +1,17 @@
 @import '../../../styles/variables';
-
-.renderDay{
+.renderDay {
   color: var(--text-color);
-  font-weight: bold;
+  // font-weight: bold;
 }
 
-.invisible{
+.invisible {
   visibility: hidden;
+}
+
+.checkedDay {
+  display: block;
+  border: 2px solid var(--accent-color);
+  border-radius: 50%;
+  color: var(--accent-color);
+
 }
