@@ -20,7 +20,7 @@ const DaysOfWeek = () => {
 };
 
 const Month = (props) => {
-  const { date, className } = props;
+  const { date, className, nextMonth, prevMonth } = props;
 
   const weeksOfMonth = () => {
     const weeksArray = [];
@@ -37,17 +37,22 @@ const Month = (props) => {
     }
     return weeksArray;
   };
+
   return (
     <div className={classNames(className, [styles.container])}>
       <h1 className={styles.header}>
         {format(date, 'LLLL')} {format(date, 'R')}
       </h1>
-      <table className={styles.table}>
-        <thead className={styles.tableHead}>
-          <DaysOfWeek />
-        </thead>
-        <tbody>{weeksOfMonth()}</tbody>
-      </table>
+      <div className={styles.monthWrapper}>
+        <button className={styles.btn} onClick={prevMonth}>{'<'}</button>
+        <table className={styles.table}>
+          <thead className={styles.tableHead}>
+            <DaysOfWeek />
+          </thead>
+          <tbody>{weeksOfMonth()}</tbody>
+        </table>
+        <button className={styles.btn} onClick={nextMonth}>{'>'}</button>
+      </div>
     </div>
   );
 };
@@ -55,6 +60,8 @@ const Month = (props) => {
 Month.protoTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   className: PropTypes.string,
+  nextMonth: PropTypes.func,
+  prevMonth: PropTypes.func,
 };
 
 export default Month;
