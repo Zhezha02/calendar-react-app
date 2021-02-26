@@ -4,7 +4,6 @@
 .container {
   @extend %block;
   background-color: var(--light-main-color);
- 
 }
 
 .dayOfWeek {
@@ -13,7 +12,6 @@
   color: var(--light-text-color);
 
   margin-bottom: auto;
-
 }
 .dayOfMonth {
   color: var(--lighter-text-color);
