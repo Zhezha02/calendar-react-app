@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import cx from 'classnames/bind';
 import { format, startOfMonth, startOfWeek, add } from 'date-fns';
 import Week from './Week';
 import styles from './Month.module.scss';
@@ -39,7 +39,7 @@ const Month = (props) => {
   };
 
   return (
-    <div className={classNames(className, [styles.container])}>
+    <div className={cx(className, [styles.container])}>
       <h1 className={styles.header}>
         {format(date, 'LLLL')} {format(date, 'R')}
       </h1>

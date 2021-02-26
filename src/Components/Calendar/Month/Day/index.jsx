@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import cx from 'classnames/bind';
 import {
   format,
   isWithinInterval,
@@ -18,7 +18,7 @@ const Day = (props) => {
   });
   return (
     <td
-      className={classNames({
+      className={cx({
         [styles.renderDay]: isCurrentMonth,
         [styles.invisible]: !isCurrentMonth,
         [styles.checkedDay]: isSameDay(day, currentDay),
