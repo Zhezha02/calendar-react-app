@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import cx from 'classnames/bind'
-import { format, startOfMonth, startOfWeek, add } from 'date-fns'
-import Week from './Week'
-import styles from './Month.module.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames/bind';
+import { format, startOfMonth, startOfWeek, add } from 'date-fns';
+import Week from './Week';
+import styles from './Month.module.scss';
 
 const DaysOfWeek = () => {
   return (
@@ -16,27 +16,27 @@ const DaysOfWeek = () => {
       <td>F</td>
       <td>S</td>
     </tr>
-  )
-}
+  );
+};
 
 const Month = props => {
-  const { date, className, nextMonth, prevMonth } = props
+  const { date, className, nextMonth, prevMonth } = props;
 
   const weeksOfMonth = () => {
-    const weeksArray = []
-    const startOfFirstWeek = startOfWeek(startOfMonth(date))
+    const weeksArray = [];
+    const startOfFirstWeek = startOfWeek(startOfMonth(date));
     for (let i = 0; i < 6; i++) {
-      const firstDayOfWeek = add(startOfFirstWeek, { weeks: i })
+      const firstDayOfWeek = add(startOfFirstWeek, { weeks: i });
       weeksArray.push(
         <Week
           key={`${format(startOfMonth(date), 'w') + i}_${format(date, 'R')}`}
           firstDayOfWeek={firstDayOfWeek}
           currentDay={date}
         />
-      )
+      );
     }
-    return weeksArray
-  }
+    return weeksArray;
+  };
 
   return (
     <div className={cx(className, [styles.container])}>
@@ -58,14 +58,14 @@ const Month = props => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 Month.protoTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   className: PropTypes.string,
   nextMonth: PropTypes.func,
-  prevMonth: PropTypes.func
-}
+  prevMonth: PropTypes.func,
+};
 
-export default Month
+export default Month;
