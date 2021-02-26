@@ -1,5 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/templates';
+@import '../../../styles/variables';
+@import '../../../styles/templates';
 .container {
   @extend %block;
   padding-left: 0;
