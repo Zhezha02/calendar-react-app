@@ -15,7 +15,7 @@ const CurrentDay = prors => {
   );
 };
 
-CurrentDay.protoTypes = {
+CurrentDay.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   className: PropTypes.string,
 };

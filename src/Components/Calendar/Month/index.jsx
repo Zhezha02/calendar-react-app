@@ -61,7 +61,7 @@ const Month = props => {
   );
 };
 
-Month.protoTypes = {
+Month.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   className: PropTypes.string,
   nextMonth: PropTypes.func,
