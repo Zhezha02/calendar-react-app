@@ -6,7 +6,7 @@ import {
   isWithinInterval,
   startOfMonth,
   endOfMonth,
-  isSameDay,
+  isToday,
 } from 'date-fns';
 import styles from './Day.module.scss';
 
@@ -21,7 +21,7 @@ const Day = props => {
       className={cx({
         [styles.renderDay]: isCurrentMonth,
         [styles.invisible]: !isCurrentMonth,
-        [styles.checkedDay]: isSameDay(day, currentDay),
+        [styles.checkedDay]: isToday(day),
       })}
     >
       {format(day, 'd')}
