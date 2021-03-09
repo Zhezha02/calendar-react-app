@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames/bind';
-import { format, startOfMonth, startOfWeek, add } from 'date-fns';
+import {
+  format,
+  startOfMonth,
+  startOfWeek,
+  add,
+  eachWeekOfInterval,
+} from 'date-fns';
 import Week from './Week';
 import styles from './Month.module.scss';
 
@@ -20,39 +26,42 @@ const DaysOfWeek = () => {
 };
 
 const Month = props => {
-  const { date, className, nextMonth, prevMonth } = props;
+  const { currentDay, className, nextMonth, prevMonth } = props;
 
   const weeksOfMonth = () => {
-    const weeksArray = [];
-    const startOfFirstWeek = startOfWeek(startOfMonth(date));
-    for (let i = 0; i < 6; i++) {
-      const firstDayOfWeek = add(startOfFirstWeek, { weeks: i });
-      weeksArray.push(
-        <Week
-          key={`${format(startOfMonth(date), 'w') + i}_${format(date, 'R')}`}
-          firstDayOfWeek={firstDayOfWeek}
-          currentDay={date}
-        />
-      );
-    }
-    return weeksArray;
+    const startOfFirstWeek = startOfWeek(startOfMonth(currentDay));
+    const endOfLastWeek = add(startOfFirstWeek, { weeks: 5 }); //maximum 6 weeks per month
+
+    return eachWeekOfInterval({
+      start: startOfFirstWeek,
+      end: endOfLastWeek,
+    }).map(startOfWeek => (
+      <Week
+        key={`${format(startOfWeek, 'w')}`}
+        firstDayOfWeek={startOfWeek}
+        currentDay={currentDay}
+      />
+    ));
   };
 
   return (
-    <div className={cx(className, [styles.container])}>
+    <div className={cx(className, styles.container)}>
       <h1 className={styles.header}>
-        {format(date, 'LLLL')} {format(date, 'R')}
+        {format(currentDay, 'LLLL')} {format(currentDay, 'R')}
       </h1>
+
       <div className={styles.monthWrapper}>
         <button className={styles.btn} onClick={prevMonth}>
           {'<'}
         </button>
+
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             <DaysOfWeek />
           </thead>
           <tbody>{weeksOfMonth()}</tbody>
         </table>
+
         <button className={styles.btn} onClick={nextMonth}>
           {'>'}
         </button>
@@ -62,7 +71,7 @@ const Month = props => {
 };
 
 Month.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
+  currentDay: PropTypes.instanceOf(Date).isRequired,
   className: PropTypes.string,
   nextMonth: PropTypes.func,
   prevMonth: PropTypes.func,

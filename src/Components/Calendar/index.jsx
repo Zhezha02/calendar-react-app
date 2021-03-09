@@ -1,43 +1,34 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { add, sub } from 'date-fns';
 import CurrentDay from './CurrentDay';
 import Month from './Month';
 import styles from './Calendar.module.scss';
-
+import { CheckedDayContext } from '../../contexts';
 import '../../styles/fonts.scss';
+// import PropTypes from 'prop-types';
 
-class Calendar extends Component {
-  constructor (props) {
-    super(props);
-    this.state = { date: new Date(), month: new Date() };
-  }
-  nextMonth = () => {
-    this.setState(() => {
-      const { month } = this.state;
-      return { month: add(month, { months: 1 }) };
-    });
-  };
+const Calendar = () => {
+  const [currentDay, setCurrentDay] = useState(new Date());
+  const [checkedDay, setCheckedDay] = useState(new Date());
 
-  prevMonth = () => {
-    this.setState(() => {
-      const { month } = this.state;
-      return { month: sub(month, { months: 1 }) };
-    });
-  };
-  render () {
-    const { date, month } = this.state;
-    return (
+  const nextMonth = () => setCurrentDay(add(currentDay, { months: 1 }));
+  const prevMonth = () => setCurrentDay(sub(currentDay, { months: 1 }));
+
+  return (
+    <CheckedDayContext.Provider value={{ checkedDay, setCheckedDay }}>
       <div className={styles.container}>
-        <CurrentDay className={styles.containerPart} date={date} />
+        <CurrentDay className={styles.containerPart} />
         <Month
           className={styles.containerPart}
-          date={month}
-          nextMonth={this.nextMonth}
-          prevMonth={this.prevMonth}
+          currentDay={currentDay}
+          nextMonth={nextMonth}
+          prevMonth={prevMonth}
         />
       </div>
-    );
-  }
-}
+    </CheckedDayContext.Provider>
+  );
+};
+
+// Calendar.propTypes = {};
 
 export default Calendar;
